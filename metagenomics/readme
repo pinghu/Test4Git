@@ -1,0 +1,29 @@
+1. set up for BUSCO package 
+https://busco.ezlab.org/
+# install in current environment 
+conda install -c bioconda -c conda-forge busco=5.0.0
+#create a seperate environment 
+#conda create -n <your_env_name> -c bioconda -c conda-forge busco=5.0.0
+#conda activate <your_env_name>
+
+# set up augustas
+export PATH="/path/to/AUGUSTUS/augustus-3.2.3/bin:$PATH"
+export PATH="/path/to/AUGUSTUS/augustus-3.2.3/scripts:$PATH"
+export AUGUSTUS_CONFIG_PATH="/path/to/AUGUSTUS/augustus-3.2.3/config/"
+
+#running
+busco -i [SEQUENCE_FILE] -l [LINEAGE] -o [OUTPUT_NAME] -m [MODE] [OTHER OPTIONS]
+
+#-l or --lineage_dataset
+
+#It can be a dataset name, i.e. bacteria_odb10, or a path i.e. ./bacteria_odb10 or /home/user/bacteria_odb10. In the former case, which is the recommended usage, BUSCO will automatically download and version the corresponding dataset. In the latter case, the dataset found in the given path will be used. Lineage can be ignored if running automated lineage selection
+
+#busco --list-datasets
+busco -m genome -i INPUT.nucleotides -o OUTPUT -l LINEAGE
+busco -m protein -i INPUT.amino_acids -o OUTPUT -l LINEAGE
+busco -m transcriptome -i INPUT.nucleotides -o OUTPUT -l LINEAGE
+busco -m MODE -i INPUT -o OUTPUT --auto-lineage
+busco -m MODE -i INPUT -o OUTPUT --auto-lineage-prok
+busco -m MODE -i INPUT -o OUTPUT --auto-lineage-euk
+https://busco.ezlab.org/busco_userguide.html
+https://gitlab.com/ezlab/busco

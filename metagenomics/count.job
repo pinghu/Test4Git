@@ -1,0 +1,16 @@
+#!/bin/bash
+#SBATCH --time=48:00:00
+#SBATCH --nodes=1 --ntasks-per-node=1
+#SBATCH --account=PYS0226
+#
+
+source /users/PYS0226/ar2767/.bash_profile
+wc /fs/scratch/PYS0226/ar2767/GSS2749/merge/*.fastq >/fs/scratch/PYS0226/ar2767/GSS2749/count/merge.count
+wc /fs/scratch/PYS0226/ar2767/GSS2749/merge2/*.fastq >/fs/scratch/PYS0226/ar2767/GSS2749/count/merge2.count
+wc /fs/scratch/PYS0226/ar2767/GSS2749/result/*.fastq >/fs/scratch/PYS0226/ar2767/GSS2749/count/result.count
+wc /fs/scratch/PYS0226/ar2767/GSS2749/sortmerna/*.fastq >/fs/scratch/PYS0226/ar2767/GSS2749/count/sortmerna.count
+cd /fs/scratch/PYS0226/ar2767/GSS2749/count/
+perl /users/PYS0226/ar2767/bin/get_count_from_wc.pl sortmerna.count>sortmerna.reads
+perl /users/PYS0226/ar2767/bin/get_count_from_wc.pl result.count>result.reads
+perl /users/PYS0226/ar2767/bin/get_count_from_wc.pl merge2.count>merge2.reads
+perl /users/PYS0226/ar2767/bin/get_count_from_wc.pl merge.count>merge.reads
